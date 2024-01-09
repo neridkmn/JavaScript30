@@ -60,6 +60,26 @@
 
 <script>
 
+function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if(!audio) return; // stop the function from running
+    audio.currentTime =  0; // rewind to the start
+    audio.play();
+    key.classList.add('playing')
+}
+
+  function removeTransition(e) {
+    if(e.propertyName !== 'transform') return; //skip it if it's not a transform
+    this.classList.remove('playing')
+  };
+
+  const keys = document.querySelectorAll('.key');
+
+  //Each key gets a event listener for it. When transition ends, we will remove it. We use for each because we cannot listen every element of an array with jQuery. We need to loop over it as keys is an array. 
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+
 </script>
 
 
