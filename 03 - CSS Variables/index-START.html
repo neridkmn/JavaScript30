@@ -23,6 +23,24 @@
 
   <style>
 
+    /*define custom variables*/
+    :root { /*highest level of HTML element*/
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      /*using var() to use a value in other declaritions*/
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -46,7 +64,20 @@
   </style>
 
   <script>
-  </script>
+    const inputs = document.querySelectorAll('.controls input'); // auerySelectors will give a NodeList
+    
+    function handleUpdate() {
+      //getting the values out of this function
+      const suffix = this.dataset.sizing || "";
+      //To change CSS variable values and add suffix on to the end
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+    }
+
+    //Listen for a change event on each input
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+</script>
 
 </body>
 </html>
