@@ -71,23 +71,32 @@
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-      //Get the DOM element out of the page, get the category by inspect on the browser
-      const category = document.querySelector('.mw-category');
+      // //Get the DOM element out of the page, get the category by inspect on the browser
+      // const category = document.querySelector('.mw-category');
 
-      // querySelectors can be used in any DOM element
-      //Find the links in this category. Map don't work here bc querySelector returns a NodeList which doesnt' have a map method. 
-      const links = Array.from(category.querySelectorAll('a')); 
-        //Another solution to convert a nodelist to an array w/ spread operator:
-         // const links = [...category.querySelectorAll('a')];
+      // // querySelectors can be used in any DOM element
+      // //Find the links in this category. Map don't work here bc querySelector returns a NodeList which doesnt' have a map method. 
+      // const links = Array.from(category.querySelectorAll('a')); 
+      //   //Another solution to convert a nodelist to an array w/ spread operator:
+      //    // const links = [...category.querySelectorAll('a')];
 
-      //Convert this links to a list of names. First map over then filter that names that only include 'de'
-      const de = links
-                .map(link => link.textContent) // Give whatever the text inside rather than the entire link
-                .filter(streetName => streetName.includes("de"));
+      // //Convert this links to a list of names. First map over then filter that names that only include 'de'
+      // const de = links
+      //           .map(link => link.textContent) // Give whatever the text inside rather than the entire link
+      //           .filter(streetName => streetName.includes("de"));
   
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    const alpha = people.sort((lastOne, nextOne) => {
+      //switch the last and next 
+      const [aLast, aFirst] = lastOne.split(', '); //destructuring: rather than returning an array, put them in their on variables 
+      const [bLast, bFirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.log(alpha);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
