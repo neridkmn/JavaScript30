@@ -71,6 +71,20 @@
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+      //Get the DOM element out of the page, get the category by inspect on the browser
+      const category = document.querySelector('.mw-category');
+
+      // querySelectors can be used in any DOM element
+      //Find the links in this category. Map don't work here bc querySelector returns a NodeList which doesnt' have a map method. 
+      const links = Array.from(category.querySelectorAll('a')); 
+        //Another solution to convert a nodelist to an array w/ spread operator:
+         // const links = [...category.querySelectorAll('a')];
+
+      //Convert this links to a list of names. First map over then filter that names that only include 'de'
+      const de = links
+                .map(link => link.textContent) // Give whatever the text inside rather than the entire link
+                .filter(streetName => streetName.includes("de"));
+  
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
